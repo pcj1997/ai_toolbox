@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>程序员AI工具箱</title>
+  <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --card-bg: #ffffff;
+      --text-color: #222222;
+      --card-hover: #e6f0ff;
+      --modal-bg: rgba(0, 0, 0, 0.6);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #121212;
+        --card-bg: #1e1e1e;
+        --text-color: #ffffff;
+        --card-hover: #2c2c2c;
+        --modal-bg: rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .main-title {
+      text-align: center;
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin: 2rem 1rem 1rem;
+    }
+
+    .button-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tool-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .tool-card:hover {
+      background-color: var(--card-hover);
+      transform: translateY(-5px);
+    }
+
+    .tool-card h2 {
+      font-size: 1.2rem;
+      margin: 0.5rem 0 0.5rem;
+    }
+
+    .tool-card p {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .tool-card span {
+      font-size: 2rem;
+      display: block;
+    }
+
+    /* 弹窗样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: var(--modal-bg);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      width: 90%;
+      max-width: 1200px;
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-header {
+      padding: 1rem;
+      background-color: #3f51b5;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .modal iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      .modal iframe {
+        height: 90vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="main-title">程序员AI工具箱</h1>
+
+  <div class="button-container">
+    <div class="tool-card" onclick="openTool('行业洞察分析', 'iBA2UWX2wUi3IWwn')">
+      <span>📈</span>
+      <h2>行业洞察分析</h2>
+      <p>深入行业趋势、获取分析报告</p>
+    </div>
+    <div class="tool-card" onclick="openTool('方法论专家', 'te8rfquJDHobrQf7')">
+      <span>🧠</span>
+      <h2>方法论专家</h2>
+      <p>获取工作方法建议和实践经验</p>
+    </div>
+    <div class="tool-card" onclick="openTool('头脑风暴', 'YnYdu9OddjFNO7yn')">
+      <span>💡</span>
+      <h2>头脑风暴</h2>
+      <p>激发创意、集思广益</p>
+    </div>
+    <div class="tool-card" onclick="openTool('需求文档设计', 'NkMCNq7LkucKE83a')">
+      <span>📄</span>
+      <h2>需求文档设计</h2>
+      <p>一键生成PRD文档</p>
+    </div>
+    <div class="tool-card" onclick="openTool('流程图/图表设计', 'AEzoQ0ubA9bq54PR')">
+      <span>📊</span>
+      <h2>流程图/图表设计</h2>
+      <p>快速可视化思路和流程</p>
+    </div>
+    <div class="tool-card" onclick="openTool('思维导图', 'sVirdnkQPvX4J8P7')">
+      <span>🧭</span>
+      <h2>思维导图</h2>
+      <p>理清结构，构建知识地图</p>
+    </div>
+    <div class="tool-card" onclick="openTool('周报生成器', '0xyHPC3r2kIuk6MM')">
+      <span>📝</span>
+      <h2>周报生成器</h2>
+      <p>自动汇总本周工作内容</p>
+    </div>
+  </div>
+
+  <!-- 弹窗部分 -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-header" id="modal-title">工具名称</div>
+      <span class="close-btn" onclick="closeModal()">✖</span>
+      <iframe id="tool-frame" src=""></iframe>
+    </div>
+  </div>
+
+  <script>
+    function openTool(title, code) {
+      document.getElementById("tool-frame").src = `https://dify.pcj1997.top/chatbot/${code}`;
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+      document.getElementById("tool-frame").src = "";
+    }
+
+    // 点击弹窗外区域关闭
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById("modal");
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

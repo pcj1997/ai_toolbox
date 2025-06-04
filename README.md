@@ -32,8 +32,6 @@
 
 
 ![image](https://github.com/user-attachments/assets/523a1c94-ede2-4171-9766-b7cf11d20c1c)
-```md
-```
 
 ---
 

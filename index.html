@@ -129,39 +129,39 @@
 </head>
 <body>
   <h1 class="main-title">程序员AI工具箱</h1>
-
+  <!-- ID请更换成自己dify URL的最后部分 -->
   <div class="button-container">
-    <div class="tool-card" onclick="openTool('行业洞察分析', 'iBA2UWX2wUi3IWwn')">
+    <div class="tool-card" onclick="openTool('行业洞察分析', 'ID1')">
       <span>📈</span>
       <h2>行业洞察分析</h2>
       <p>深入行业趋势、获取分析报告</p>
     </div>
-    <div class="tool-card" onclick="openTool('方法论专家', 'te8rfquJDHobrQf7')">
+    <div class="tool-card" onclick="openTool('方法论专家', 'ID2')">
       <span>🧠</span>
       <h2>方法论专家</h2>
       <p>获取工作方法建议和实践经验</p>
     </div>
-    <div class="tool-card" onclick="openTool('头脑风暴', 'YnYdu9OddjFNO7yn')">
+    <div class="tool-card" onclick="openTool('头脑风暴', 'ID3')">
       <span>💡</span>
       <h2>头脑风暴</h2>
       <p>激发创意、集思广益</p>
     </div>
-    <div class="tool-card" onclick="openTool('需求文档设计', 'NkMCNq7LkucKE83a')">
+    <div class="tool-card" onclick="openTool('需求文档设计', 'ID4')">
       <span>📄</span>
       <h2>需求文档设计</h2>
       <p>一键生成PRD文档</p>
     </div>
-    <div class="tool-card" onclick="openTool('流程图/图表设计', 'AEzoQ0ubA9bq54PR')">
+    <div class="tool-card" onclick="openTool('流程图/图表设计', 'ID5')">
       <span>📊</span>
       <h2>流程图/图表设计</h2>
       <p>快速可视化思路和流程</p>
     </div>
-    <div class="tool-card" onclick="openTool('思维导图', 'sVirdnkQPvX4J8P7')">
+    <div class="tool-card" onclick="openTool('思维导图', 'ID6')">
       <span>🧭</span>
       <h2>思维导图</h2>
       <p>理清结构，构建知识地图</p>
     </div>
-    <div class="tool-card" onclick="openTool('周报生成器', '0xyHPC3r2kIuk6MM')">
+    <div class="tool-card" onclick="openTool('周报生成器', 'ID7')">
       <span>📝</span>
       <h2>周报生成器</h2>
       <p>自动汇总本周工作内容</p>
@@ -179,7 +179,8 @@
 
   <script>
     function openTool(title, code) {
-      document.getElementById("tool-frame").src = `https://dify.pcj1997.top/chatbot/${code}`;
+      <!-- URL请更换成自己dify的 -->
+      document.getElementById("tool-frame").src = `https://www.dify.com/chatbot/${code}`;
       document.getElementById("modal-title").textContent = title;
       document.getElementById("modal").style.display = "flex";
     }
